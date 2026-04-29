@@ -1,0 +1,9 @@
+{
+  "name": "fauz-bday-reels",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Cinematic vintage reel maker for Fauz's birthday in Marrakech.",
+  "engines": {
+    "node": ">=18"
+  }
+}

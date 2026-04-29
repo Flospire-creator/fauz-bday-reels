@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0f0e0c" />
+  <title>Fauz's Birthday Reels</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <main id="app">
+    <section id="gate" class="screen" aria-labelledby="gate-title">
+      <div class="card">
+        <p class="kicker">Marrakech '26</p>
+        <h1 id="gate-title">Fauz's Birthday Reels</h1>
+        <p class="lede">Drop your clips and pics, hit the button, get a cinematic vintage reel. Different every time.</p>
+        <form id="gate-form" novalidate>
+          <label for="password">Trip password</label>
+          <input id="password" name="password" type="password" autocomplete="off" required aria-describedby="gate-help" />
+          <p id="gate-help" class="help">Same password Flo shared in the group.</p>
+          <button type="submit" class="btn primary">Enter</button>
+          <p id="gate-error" class="error" role="alert" hidden>Wrong password. Try again.</p>
+        </form>
+      </div>
+    </section>
+
+    <section id="studio" class="screen" hidden aria-labelledby="studio-title">
+      <header class="studio-head">
+        <p class="kicker">Marrakech '26</p>
+        <h1 id="studio-title">Make a reel</h1>
+        <p class="who">Hi <span id="who-name">friend</span>. Aim for 4 to 8 clips and pics, mixed.</p>
+      </header>
+
+      <fieldset class="who-pick">
+        <legend>Who's making this?</legend>
+        <div class="chip-row" role="radiogroup" aria-label="Choose your name">
+          <label class="chip"><input type="radio" name="who" value="Fati" /> <span>Fati</span></label>
+          <label class="chip"><input type="radio" name="who" value="Zinny" /> <span>Zinny</span></label>
+          <label class="chip"><input type="radio" name="who" value="Asiat" /> <span>Asiat</span></label>
+          <label class="chip"><input type="radio" name="who" value="Fauz" /> <span>Fauz</span></label>
+          <label class="chip"><input type="radio" name="who" value="Flo" /> <span>Flo</span></label>
+        </div>
+      </fieldset>
+
+      <div class="upload-zone" id="upload-zone">
+        <input id="files" type="file" accept="image/*,video/*" multiple hidden />
+        <label for="files" class="upload-label">
+          <strong>Tap to add clips and pics</strong>
+          <span>Up to 8. Videos best at 5 to 10 seconds.</span>
+        </label>
+        <ul id="file-list" class="file-list" aria-live="polite"></ul>
+      </div>
+
+      <div class="controls">
+        <button id="generate" class="btn primary big" type="button" disabled>Generate my reel</button>
+        <p id="generate-help" class="help">Add at least 3 items to enable.</p>
+      </div>
+
+      <section id="render-status" class="render-status" hidden aria-live="polite">
+        <div class="spinner" aria-hidden="true"></div>
+        <p id="status-text">Uploading your clips...</p>
+        <p class="help">This usually takes 30 to 60 seconds.</p>
+      </section>
+
+      <section id="result" class="result" hidden>
+        <h2>Your reel is ready</h2>
+        <div class="reel-preview">
+          <video id="reel-video" controls playsinline preload="metadata"></video>
+        </div>
+        <div class="reel-actions">
+          <a id="download" class="btn primary" download>Download</a>
+          <button id="another" class="btn ghost" type="button">Make another</button>
+        </div>
+        <p class="help">Open in Instagram Reels editor to add trending audio for the full effect.</p>
+      </section>
+
+      <p id="error" class="error" role="alert" hidden></p>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/template-builder.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
