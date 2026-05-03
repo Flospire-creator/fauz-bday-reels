@@ -316,6 +316,23 @@ input[type="text"]:focus {
   object-fit: cover;
   display: block;
 }
+.file-list li.no-preview {
+  background: linear-gradient(180deg, rgba(176, 138, 74, 0.18), rgba(0, 0, 0, 0.4));
+}
+.file-list .placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 6px;
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--ink-soft);
+  letter-spacing: 0.04em;
+  word-break: break-all;
+}
 .file-list .badge {
   position: absolute;
   top: 4px;

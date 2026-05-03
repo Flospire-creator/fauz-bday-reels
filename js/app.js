@@ -127,7 +127,15 @@
         media.playsInline = true;
         media.preload = "metadata";
       } else {
-        media.alt = `Item ${i + 1}`;
+        media.alt = "";
+        media.addEventListener("error", () => {
+          li.classList.add("no-preview");
+          media.remove();
+          const ph = document.createElement("span");
+          ph.className = "placeholder";
+          ph.textContent = (it.file.name || "image").slice(0, 18);
+          li.insertBefore(ph, li.firstChild);
+        });
       }
       const badge = document.createElement("span");
       badge.className = "badge";
