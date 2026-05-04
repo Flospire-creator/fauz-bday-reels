@@ -87,7 +87,8 @@
 
   async function convertHeic(file) {
     if (!window.heic2any) throw new Error("HEIC converter not loaded");
-    const out = await window.heic2any({ blob: file, toType: "image/jpeg", quality: 0.9 });
+    // quality: 1.0 keeps full resolution and image quality.
+    const out = await window.heic2any({ blob: file, toType: "image/jpeg", quality: 1.0 });
     const blob = Array.isArray(out) ? out[0] : out;
     const newName = file.name.replace(/\.(heic|heif)$/i, ".jpg");
     return new File([blob], newName, { type: "image/jpeg" });
