@@ -99,15 +99,11 @@
       animations: [FADE_IN, FADE_OUT],
     });
 
-    // Media slots
+    // Media slots. No animations on clips for now (debugging blank output).
     let t = 1.6;
     media.forEach((m, i) => {
       const isVideo = m.kind === "video";
       const useDuration = Math.min(slotTime, isVideo ? (m.duration || slotTime) : slotTime);
-      const transition = transitions[i % transitions.length];
-      const animations = [...kenBurns()];
-      if (transition === "fade") animations.push(FADE_IN, FADE_OUT);
-      if (transition === "flash") animations.push(FLASH_IN);
 
       elements.push({
         name: `Clip${i + 1}`,
@@ -117,9 +113,6 @@
         duration: useDuration,
         source: m.url,
         fit: "cover",
-        x: "50%", y: "50%", x_anchor: "50%", y_anchor: "50%",
-        width: "100%", height: "100%",
-        animations,
       });
       t += useDuration;
     });
