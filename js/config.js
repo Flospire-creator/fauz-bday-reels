@@ -19,5 +19,5 @@ window.APP_CONFIG = {
   // Upload limits.
   MAX_FILES: 8,
   MIN_FILES: 3,
-  MAX_FILE_MB: 60,
+  MAX_FILE_MB: 200,
 };

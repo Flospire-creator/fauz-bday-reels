@@ -81,12 +81,37 @@
 
   function uid() { return Math.random().toString(36).slice(2, 9); }
 
-  function addFiles(fileList) {
+  function isHeic(file) {
+    return /\.(heic|heif)$/i.test(file.name) || file.type === "image/heic" || file.type === "image/heif";
+  }
+
+  async function convertHeic(file) {
+    if (!window.heic2any) throw new Error("HEIC converter not loaded");
+    const out = await window.heic2any({ blob: file, toType: "image/jpeg", quality: 0.9 });
+    const blob = Array.isArray(out) ? out[0] : out;
+    const newName = file.name.replace(/\.(heic|heif)$/i, ".jpg");
+    return new File([blob], newName, { type: "image/jpeg" });
+  }
+
+  async function addFiles(fileList) {
     const files = Array.from(fileList);
-    for (const f of files) {
+    let converting = files.filter(isHeic).length;
+    if (converting > 0) {
+      els.generateHelp.textContent = `Converting ${converting} iPhone photo${converting > 1 ? "s" : ""} to JPEG...`;
+    }
+    for (let f of files) {
       if (items.length >= cfg.MAX_FILES) {
         showError(`Max ${cfg.MAX_FILES} items.`);
         break;
+      }
+      try {
+        if (isHeic(f)) {
+          f = await convertHeic(f);
+        }
+      } catch (err) {
+        console.error("HEIC convert failed", err);
+        showError(`Could not convert ${f.name}. Try saving as JPEG first.`);
+        continue;
       }
       const isImg = f.type.startsWith("image/");
       const isVid = f.type.startsWith("video/");
@@ -103,8 +128,8 @@
         preview: URL.createObjectURL(f),
       };
       items.push(item);
+      renderList();
     }
-    renderList();
     validate();
   }
 
